@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(150deg, aquamarine, aqua);
+}
+
+form {
+    width: 50vw;
+    margin: 50px auto;
+    background-color: rgb(51, 166, 166);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px black;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+form input,
+textarea,
+select,
+button {
+    padding: 10px;
+    border: 0;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 2px;
+    resize: vertical;
+    background-color: transparent;
+    border: 2px solid black;
+    outline: 2px solid black;
+    color: white;
+}
+
+form select {
+    background-color: aquamarine;
+    color: black;
+}
+
+form select option {
+    background-color: rgb(51, 200, 17);
+    color: black;
+}
+
+form button {
+    background-color: aquamarine;
+    color: black;
+}
+
+form button:hover {
+    background-color: rgb(12, 213, 146);
+}
+
+::placeholder {
+    color: white;
+}
+
+.createdTaskContainer {
+    width: 50vw;
+    margin: 50px auto;
+    background-color: rgb(142, 163, 20);
+    padding: 20px 10px;
+    color: white;
+    border-radius: 5px;
+    position: relative;
+}
+
+.category {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgb(55, 128, 55);
+    padding: 5px 20px;
+    border-radius: 50px;
+}
+
+.status {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    padding: 5px 15px;
+    border-radius: 50px;
+}
+
+.pending {
+    background-color: red;
+}
+
+.completed {
+    background-color: green;
+}
+
+.titleContainer {
+    padding: 10px 0;
+    font-weight: 100;
+}
+
+.descContainer {
+    padding: 10px;
+    background-color: rgb(162, 171, 26);
+    width: 78%;
+    font-weight: bold;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px black;
+}
+
+.deleteBtn {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    border: 0;
+    outline: none;
+    font-size: 25px;
+}
+
+.checkbox {
+    position: absolute;
+    top: -30px;
+    right: 50px;
+    border: 0;
+    outline: 0;
+    font-size: 25px;
+}
+
+.deleteBtn:hover {
+    transform: translatey(-5px);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.titleContainer.crosstheCompletedTask {
+    text-decoration: line-through;
+    color: rgb(154, 16, 27);
+    background-color: rgba(128, 128, 128,0.6);
+    border-radius: 5px;
+    padding: 10px;
+    width: 78%;
+    margin: 10px 0;
+}
+.updateBtn{
+    position: absolute;
+    top: -30px;
+    right: 100px;
+    border: 0;
+    outline: 0;
+    font-size: 25px;
+}
+
+@media screen and (max-width:1024px) {
+
+    form,
+    .createdTaskContainer {
+        width: 70vw;
+    }
+}
