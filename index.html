@@ -13,17 +13,23 @@
 
     <form>
         <h2>Todo List With cateogies</h2>
-        <input type="text" id="title" placeholder="Enter the title">
-        <textarea id="description" placeholder="Enter the Description"></textarea>
-        <select name="category" id="category">
+        <input type="text"  required="true" id="title" placeholder="Enter the title">
+        <textarea id="description"  required="true"placeholder="Enter the Description"></textarea>
+        <select name="category" id="category" required>
             <option value="">Choose type of work</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
             <option value="Urgent">Urgent</option>
+            <option value="Study">Study</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Fitness">Fitness</option>
+            <option value="Chores">Chores</option>
+            <option value="Meetings">Meetings</option>
         </select>
-        <button type="submit">Add Todo</button>
+        <button type="submit" id="submit_btn">Add Task</button>
     </form>
 
+    <button class="show_completed_tasks_btn">All Completed Tasks</button>
     <!-- scripts -->
     <script src="./script.js"></script>
 </body>

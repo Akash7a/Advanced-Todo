@@ -113,18 +113,12 @@ form button:hover {
 }
 
 .deleteBtn {
-    position: absolute;
-    top: -30px;
-    right: 0;
     border: 0;
     outline: none;
     font-size: 25px;
 }
 
 .checkbox {
-    position: absolute;
-    top: -30px;
-    right: 50px;
     border: 0;
     outline: 0;
     font-size: 25px;
@@ -136,6 +130,7 @@ form button:hover {
     cursor: pointer;
 }
 
+
 .titleContainer.crosstheCompletedTask {
     text-decoration: line-through;
     color: rgb(154, 16, 27);
@@ -146,18 +141,29 @@ form button:hover {
     margin: 10px 0;
 }
 .updateBtn{
-    position: absolute;
-    top: -30px;
-    right: 100px;
     border: 0;
     outline: 0;
     font-size: 25px;
 }
-
+.ctrl{
+    position: absolute;
+    top: -30px;
+    left: -10px;
+}
+.ctrl > button{
+    font-size: 30px;
+}
 @media screen and (max-width:1024px) {
 
     form,
     .createdTaskContainer {
         width: 70vw;
     }
+}
+.show_completed_tasks_btn{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99;
+    background-color: blue;
 }

@@ -3,6 +3,9 @@ const form = document.querySelector("form");
 const titleInput = document.querySelector("#title");
 const descInput = document.querySelector("#description");
 const categoryInput = document.querySelector("#category");
+const submitBtn = document.querySelector("#submit_btn");
+const showCompletedTaskBtn = document.querySelector(".show_completed_tasks_btn");
+
 
 let allTasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
 let editingTaskIndex = null;
@@ -51,9 +54,13 @@ const createTask = () => {
         updatedBtn.classList.add("updateBtn");
         updatedBtn.addEventListener("click", () => updatedTask(task, index));
 
-        createdTaskContainer.appendChild(updatedBtn);
-        createdTaskContainer.appendChild(checkBoxBtn);
-        createdTaskContainer.appendChild(deleteBtn);
+        const ctrlBtns = document.createElement("div");
+        ctrlBtns.classList.add("ctrl");
+
+        ctrlBtns.appendChild(updatedBtn);
+        ctrlBtns.appendChild(checkBoxBtn);
+        ctrlBtns.appendChild(deleteBtn);
+        createdTaskContainer.appendChild(ctrlBtns);
         createdTaskContainer.appendChild(statusContainer);
         createdTaskContainer.appendChild(category);
         createdTaskContainer.appendChild(titleContainer);
@@ -74,12 +81,38 @@ const toggleTask = (index) => {
     localStorage.setItem("tasks", JSON.stringify(allTasks));
     createTask();
 };
-
 const updatedTask = (task, index) => {
+    if (task.status === "completed") {
+        alert("You cannot update a completed task.");
+        return;
+    }
     editingTaskIndex = index;
     titleInput.value = task.title;
     descInput.value = task.description;
     categoryInput.value = task.category;
+    submitBtn.textContent = "Save Updates";
+    createTask();
+};
+const filterTask = () => {
+    let showCompleted = false;
+    showCompletedTaskBtn.addEventListener("click", () => {
+        const taskContainers = document.querySelectorAll(".createdTaskContainer");
+
+        taskContainers.forEach((task, index) => {
+            const status = allTasks[index].status;
+            if (showCompleted) {
+                task.style.display = "block";
+            } else if (status === "pending") {
+                task.style.display = "none";
+            } else {
+                task.style.display = "block";
+            }
+        })
+
+        showCompletedTaskBtn.textContent = showCompleted ? "Show Completed Tasks" : "Show All Tasks";
+
+        showCompleted = !showCompleted;
+    })
 };
 
 form.addEventListener("submit", (e) => {
@@ -91,8 +124,9 @@ form.addEventListener("submit", (e) => {
             description: descInput.value,
             category: categoryInput.value,
             status: allTasks[editingTaskIndex].status,
-        };
+        }
         editingTaskIndex = null;
+        submitBtn.textContent = "Add Task";
     } else {
         const createdTask = {
             title: titleInput.value,
@@ -106,10 +140,11 @@ form.addEventListener("submit", (e) => {
     localStorage.setItem("tasks", JSON.stringify(allTasks));
     createTask();
 
-    // Reset the form
     titleInput.value = "";
     descInput.value = "";
     categoryInput.value = "";
 });
 
 createTask();
+filterTask();
+filterTask();
