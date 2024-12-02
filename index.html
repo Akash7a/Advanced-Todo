@@ -6,15 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo list with cateogies</title>
     <link rel="stylesheet" href="./style.css">
-  
 </head>
 
 <body>
-
+    <header>
+        <nav>
+            <ul class="list">
+                <li>Home</li>
+                <li>Pending</li>
+                <li>Completed</li>
+                <li>Personal</li>
+                <li>Urgent</li>
+                <li>Work</li>
+                <li>Study</li>
+                <li>Shopping</li>
+                <li>Fitness</li>
+                <li>Chores</li>
+                <li>Meetings</li>
+            </ul>
+        </nav>
+    </header>
     <form>
         <h2>Todo List With cateogies</h2>
-        <input type="text"  required="true" id="title" placeholder="Enter the title">
-        <textarea id="description"  required="true"placeholder="Enter the Description"></textarea>
+        <input type="text" required="true" id="title" placeholder="Enter the title">
+        <textarea id="description" required="true" placeholder="Enter the Description"></textarea>
         <select name="category" id="category" required>
             <option value="">Choose type of work</option>
             <option value="Work">Work</option>

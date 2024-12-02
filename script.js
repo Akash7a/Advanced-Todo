@@ -5,7 +5,7 @@ const descInput = document.querySelector("#description");
 const categoryInput = document.querySelector("#category");
 const submitBtn = document.querySelector("#submit_btn");
 const showCompletedTaskBtn = document.querySelector(".show_completed_tasks_btn");
-
+const listItems = document.querySelectorAll(".list li");
 
 let allTasks = localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : [];
 let editingTaskIndex = null;
@@ -81,6 +81,7 @@ const toggleTask = (index) => {
     localStorage.setItem("tasks", JSON.stringify(allTasks));
     createTask();
 };
+
 const updatedTask = (task, index) => {
     if (task.status === "completed") {
         alert("You cannot update a completed task.");
@@ -93,13 +94,16 @@ const updatedTask = (task, index) => {
     submitBtn.textContent = "Save Updates";
     createTask();
 };
+
 const filterTask = () => {
     let showCompleted = false;
+
     showCompletedTaskBtn.addEventListener("click", () => {
         const taskContainers = document.querySelectorAll(".createdTaskContainer");
 
         taskContainers.forEach((task, index) => {
             const status = allTasks[index].status;
+
             if (showCompleted) {
                 task.style.display = "block";
             } else if (status === "pending") {
@@ -107,14 +111,52 @@ const filterTask = () => {
             } else {
                 task.style.display = "block";
             }
-        })
+        });
 
         showCompletedTaskBtn.textContent = showCompleted ? "Show Completed Tasks" : "Show All Tasks";
 
         showCompleted = !showCompleted;
-    })
+    });
 };
 
+const filterByStatusAndCategory = () => {
+    listItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            const listText = e.target.textContent.trim().toLowerCase();
+            let taskFound = false;
+
+            const taskContainers = document.querySelectorAll(".createdTaskContainer");
+
+            taskContainers.forEach((task, index) => {
+                const taskCategory = allTasks[index].category.toLowerCase();
+                if (listText === "completed" && allTasks[index].status === "completed") {
+                    task.style.display = "block";
+                    taskFound = true; 
+                } else if (listText === "pending" && allTasks[index].status === "pending") {
+                    task.style.display = "block";
+                    taskFound = true;
+                } else if (listText === taskCategory || listText === "home") {
+                    task.style.display = "block";
+                    taskFound = true;
+                } else {
+                    task.style.display = "none";
+                }
+            });
+
+            const noMessageContainer = document.querySelector(".noMessageContainer");
+            if (!taskFound && !noMessageContainer) {
+                const message = document.createElement("p");
+                message.classList.add("noMessageContainer");
+                message.textContent = `This does not exist in your tasks list for category "${listText}"`;
+                body.appendChild(message);
+            } else if (taskFound && noMessageContainer) {
+                noMessageContainer.remove();
+            } else if (!taskFound && noMessageContainer) {
+                noMessageContainer.textContent = `This does not exist in your tasks list for category "${listText}"`;
+            }
+        });
+    });
+}
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -124,7 +166,7 @@ form.addEventListener("submit", (e) => {
             description: descInput.value,
             category: categoryInput.value,
             status: allTasks[editingTaskIndex].status,
-        }
+        };
         editingTaskIndex = null;
         submitBtn.textContent = "Add Task";
     } else {
@@ -147,4 +189,4 @@ form.addEventListener("submit", (e) => {
 
 createTask();
 filterTask();
-filterTask();
+filterByStatusAndCategory();

@@ -1,3 +1,4 @@
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,6 +11,7 @@ body {
     background: linear-gradient(150deg, aquamarine, aqua);
 }
 
+/* Form Styling */
 form {
     width: 50vw;
     margin: 50px auto;
@@ -58,18 +60,22 @@ form button:hover {
     background-color: rgb(12, 213, 146);
 }
 
-::placeholder {
-    color: white;
-}
-
+/* Card Styling */
 .createdTaskContainer {
     width: 50vw;
-    margin: 50px auto;
+    margin: 20px auto;
     background-color: rgb(142, 163, 20);
-    padding: 20px 10px;
+    padding: 20px;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.createdTaskContainer:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .category {
@@ -99,71 +105,113 @@ form button:hover {
 
 .titleContainer {
     padding: 10px 0;
-    font-weight: 100;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #fff;
+    text-align: center;
 }
 
 .descContainer {
     padding: 10px;
     background-color: rgb(162, 171, 26);
-    width: 78%;
-    font-weight: bold;
+    width: 100%;
+    font-weight: normal;
     color: black;
     border-radius: 5px;
     box-shadow: 2px 5px 10px black;
+    margin-bottom: 10px;
+    font-size: 1rem;
 }
 
-.deleteBtn {
-    border: 0;
-    outline: none;
-    font-size: 25px;
-}
-
-.checkbox {
+/* Button and Controls */
+.deleteBtn,
+.updateBtn {
     border: 0;
     outline: 0;
-    font-size: 25px;
-}
-
-.deleteBtn:hover {
-    transform: translatey(-5px);
-    transition: 0.2s;
+    font-size: 20px;
+    color: white;
     cursor: pointer;
 }
 
+.deleteBtn {
+    background-color: red;
+}
 
+.updateBtn {
+    background-color: blue;
+}
+
+.deleteBtn:hover,
+.updateBtn:hover {
+    transform: translateY(-5px);
+    transition: 0.2s;
+}
+
+/* Completed Task Style */
 .titleContainer.crosstheCompletedTask {
     text-decoration: line-through;
     color: rgb(154, 16, 27);
-    background-color: rgba(128, 128, 128,0.6);
+    background-color: rgba(128, 128, 128, 0.6);
     border-radius: 5px;
     padding: 10px;
-    width: 78%;
+    width: 100%;
     margin: 10px 0;
 }
-.updateBtn{
-    border: 0;
-    outline: 0;
-    font-size: 25px;
-}
-.ctrl{
-    position: absolute;
-    top: -30px;
-    left: -10px;
-}
-.ctrl > button{
-    font-size: 30px;
-}
-@media screen and (max-width:1024px) {
 
+/* Responsive Layout */
+@media screen and (max-width: 1024px) {
     form,
     .createdTaskContainer {
         width: 70vw;
     }
 }
-.show_completed_tasks_btn{
+
+.show_completed_tasks_btn {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 99;
     background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.show_completed_tasks_btn:hover {
+    background-color: darkblue;
+}
+
+/* Navigation */
+header {
+    background-color: rgb(36, 226, 163);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    padding: 20px;
+}
+
+header nav {
+    padding: 10px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    font-weight: 300;
+}
+
+ul li {
+    cursor: pointer;
+}
+
+ul li:hover {
+    color: red;
+}
+
+ul li:active {
+    color: black;
 }
